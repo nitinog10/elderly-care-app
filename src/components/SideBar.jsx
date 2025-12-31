@@ -26,7 +26,7 @@ export function Sidebar() {
         </div>
         <div>
           <h1 className="font-bold text-xl leading-none bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            CareConnect
+            EIRAA
           </h1>
           <p className="text-xs text-slate-500 mt-1 font-medium">Elderly Monitor</p>
         </div>
@@ -161,3 +161,4 @@ export function MobileHeader() {
     </div>
   );
 }
+
