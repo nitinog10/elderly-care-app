@@ -1,5 +1,7 @@
+```jsx
 import { useState } from "react";
 import { useBand } from "@/context/BandContext";
+import { addContactToBand } from "@/utils/bandUtils";
 
 export default function EmergencyContacts() {
   const { currentBand, setBands } = useBand();
@@ -10,18 +12,10 @@ export default function EmergencyContacts() {
     return <p className="p-6">No band selected.</p>;
   }
 
-  const addContact = () => {
-    if (!name || !phone) return;
+  const handleAddContact = () => {
+    if (!name ||!phone) return;
 
-    const newContact = { name, phone };
-
-    setBands(prev =>
-      prev.map(b =>
-        b.id === currentBand.id
-          ? { ...b, contacts: [...b.contacts, newContact] }
-          : b
-      )
-    );
+    setBands(addContactToBand(currentBand.id, { name, phone }, setBands));
 
     setName("");
     setPhone("");
@@ -33,7 +27,6 @@ export default function EmergencyContacts() {
         Emergency Contacts – {currentBand.name}
       </h2>
 
-      {/* Contact List */}
       <div className="space-y-3 mb-6">
         {currentBand.contacts.length === 0 && (
           <p className="text-gray-500 text-sm">No contacts added yet.</p>
@@ -50,7 +43,6 @@ export default function EmergencyContacts() {
         ))}
       </div>
 
-      {/* Add Contact */}
       <div className="bg-white p-4 rounded-xl shadow space-y-3">
         <h3 className="font-semibold">Add New Contact</h3>
 
@@ -69,7 +61,7 @@ export default function EmergencyContacts() {
         />
 
         <button
-          onClick={addContact}
+          onClick={handleAddContact}
           className="w-full bg-blue-600 text-white py-2 rounded-lg"
         >
           Add Contact
@@ -78,3 +70,4 @@ export default function EmergencyContacts() {
     </div>
   );
 }
+```
