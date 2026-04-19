@@ -1,3 +1,5 @@
-export function cn(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+```javascript
+import { cn } from 'path/to/shared-utils';
+
+export { cn };
+```
