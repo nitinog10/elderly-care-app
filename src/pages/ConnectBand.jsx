@@ -1,7 +1,9 @@
+```jsx
 import { useNavigate } from "react-router-dom";
 import { useBand } from "@/context/BandContext";
 import { useState } from "react";
 import { Heart } from "lucide-react";
+import { generateNewBand } from "@/utils/bandUtils";
 
 export default function ConnectBand() {
   const navigate = useNavigate();
@@ -16,37 +18,10 @@ export default function ConnectBand() {
       return;
     }
 
-    const newBandId = `band-${Date.now()}`;
-
-    const newBand = {
-      id: newBandId,
-      name: userName.trim(),
-      contacts: [],
-      vitals: {
-        heartRate: 70,
-        steps: 0,
-        temperature: 36.5,
-        tempHistory: [36.4, 36.5, 36.6],
-        battery: 100,
-        heartHistory: [70, 70, 70, 70, 70, 70, 70],
-        fallDetected: false,
-      },
-      settings : {
-        stepsTarget: 10000,
-      },
-      reminders: [
-    {
-      id: "rem-1",
-      time: "2025-01-28T15:15",
-      message: "Take your blood pressure medicine",
-      voice: "Son",
-      completed: false,
-    }
-  ]
-    };
+    const newBand = generateNewBand(userName.trim());
 
     setBands(prev => [...prev, newBand]);
-    setCurrentBandId(newBandId);
+    setCurrentBandId(newBand.id);
     navigate("/dashboard");
   }
 
@@ -111,3 +86,4 @@ export default function ConnectBand() {
     </div>
   );
 }
+```
